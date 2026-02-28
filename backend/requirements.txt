@@ -24,7 +24,7 @@ celery==5.4.0
 redis==5.2.1
 
 # Data validation
-pydantic==2.10.3
+pydantic==2.10.6
 pydantic-settings==2.7.0
 
 # Media processing
