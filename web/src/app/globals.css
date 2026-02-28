@@ -17,53 +17,118 @@
   }
 }
 
-/* Typing indicator */
+/* ── Typing indicator ── */
 @keyframes typingBounce {
   0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
   30% { transform: translateY(-6px); opacity: 1; }
 }
-
-.typing-dot {
-  animation: typingBounce 1.2s infinite ease-in-out;
-}
+.typing-dot { animation: typingBounce 1.2s infinite ease-in-out; }
 .typing-dot:nth-child(2) { animation-delay: 0.15s; }
 .typing-dot:nth-child(3) { animation-delay: 0.3s; }
 
-/* Message fade in */
+/* ── Message fade-in ── */
 @keyframes msgSlideIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+.msg-appear { animation: msgSlideIn 0.25s ease-out forwards; }
 
-.msg-appear {
-  animation: msgSlideIn 0.25s ease-out forwards;
-}
-
-/* Card hover lift */
-.card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+/* ── Card hover lift ── */
+.card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .card-hover:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(0,0,0,0.12);
 }
 
-/* Scrollbar */
+/* ── Custom scrollbar ── */
 .chat-scroll::-webkit-scrollbar { width: 4px; }
 .chat-scroll::-webkit-scrollbar-track { background: transparent; }
 .chat-scroll::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
 
-/* Gradient text */
+/* ── Animated mesh gradient text ── */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
 .gradient-text {
-  background: linear-gradient(135deg, #f97316, #fb923c);
+  background: linear-gradient(135deg, #f97316, #fb923c, #fbbf24, #f97316);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 4s ease infinite;
 }
 
-/* Glass card */
+/* ── Glass card ── */
 .glass {
-  background: rgba(255,255,255,0.07);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ── Gradient border via mask pseudo-element ── */
+.gradient-border { position: relative; }
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.45),
+    rgba(255, 255, 255, 0.06),
+    rgba(249, 115, 22, 0.25)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Floating aurora orbs ── */
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-22px) scale(1.04); }
+}
+.float-orb   { animation: floatOrb 9s ease-in-out infinite; }
+.float-orb-2 { animation: floatOrb 12s ease-in-out infinite 2.5s; }
+.float-orb-3 { animation: floatOrb 15s ease-in-out infinite 5s; }
+
+/* ── Shimmer (skeleton/loading states) ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ── Pulsing glow on primary CTA ── */
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(249,115,22,0.3), 0 8px 24px rgba(0,0,0,0.3); }
+  50%       { box-shadow: 0 0 44px rgba(249,115,22,0.55), 0 8px 32px rgba(249,115,22,0.2); }
+}
+.cta-glow { animation: ctaGlow 3s ease-in-out infinite; }
+
+/* ── Live indicator dot ── */
+@keyframes liveDot {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.5; }
+}
+.live-dot { animation: liveDot 1.8s ease-in-out infinite; }
+
+/* ── Bento card hover ── */
+.bento-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.bento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  border-color: rgba(249, 115, 22, 0.22) !important;
 }
