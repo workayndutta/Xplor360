@@ -1,0 +1,17 @@
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+export default function RootLayout() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <StatusBar style="dark" />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="itinerary/[id]" options={{ headerShown: true, title: "Itinerary" }} />
+        <Stack.Screen name="record" options={{ presentation: "modal" }} />
+        <Stack.Screen name="auth/login" />
+      </Stack>
+    </GestureHandlerRootView>
+  );
+}

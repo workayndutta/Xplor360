@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary: #f97316;
+  --brand-dark: #c2410c;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+}

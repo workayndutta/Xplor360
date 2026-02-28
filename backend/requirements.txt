@@ -1,0 +1,36 @@
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-multipart==0.0.12
+
+# Database & Auth
+supabase==2.10.0
+asyncpg==0.30.0
+sqlalchemy==2.0.36
+
+# AI / ML
+anthropic==0.40.0
+openai==1.57.4
+langchain==0.3.13
+langchain-anthropic==0.3.3
+langchain-community==0.3.13
+
+# HTTP client
+httpx==0.28.1
+aiohttp==3.11.11
+
+# Background jobs
+celery==5.4.0
+redis==5.2.1
+
+# Data validation
+pydantic==2.10.3
+pydantic-settings==2.7.0
+
+# Media processing
+boto3==1.35.90         # Cloudflare R2 (S3-compatible)
+
+# Utilities
+python-dotenv==1.0.1
+tenacity==9.0.0        # Retry logic for API calls
+structlog==24.4.0      # Structured logging

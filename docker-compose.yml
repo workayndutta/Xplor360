@@ -1,0 +1,54 @@
+version: "3.9"
+
+# Local development stack
+# Usage: docker compose up -d
+# Then run: cd backend && uvicorn app.main:app --reload
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Optional: local Postgres for offline dev without Supabase
+  # Comment out if using Supabase cloud directly
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: xplor360
+      POSTGRES_USER: xplor360
+      POSTGRES_PASSWORD: xplor360dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xplor360"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Celery worker for background jobs (Phase 2+)
+  worker:
+    build:
+      context: ./backend
+    command: celery -A app.worker worker --loglevel=info
+    env_file:
+      - ./backend/.env
+    depends_on:
+      redis:
+        condition: service_healthy
+    profiles:
+      - full   # Only start with: docker compose --profile full up
+
+volumes:
+  redis_data:
+  postgres_data:

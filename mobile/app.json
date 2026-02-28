@@ -1,0 +1,66 @@
+{
+  "expo": {
+    "name": "Xplor360",
+    "slug": "xplor360",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "xplor360",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f97316"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "in.xplor360.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Xplor360 uses your camera to record travel content.",
+        "NSMicrophoneUsageDescription": "Xplor360 uses your microphone to record voice notes and narrations.",
+        "NSLocationWhenInUseUsageDescription": "Xplor360 uses your location to provide contextual nudges and shot guides.",
+        "NSPhotoLibraryUsageDescription": "Xplor360 saves your travel photos and videos to your library."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#f97316"
+      },
+      "package": "in.xplor360.app",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-camera",
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow Xplor360 to access your microphone for recording travel content."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow Xplor360 to use your location for contextual nudges."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/notification-icon.png",
+          "color": "#f97316"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
